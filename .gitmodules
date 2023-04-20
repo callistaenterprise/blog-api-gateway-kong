@@ -1,0 +1,6 @@
+[submodule "kong-with-plugins/plugins/kong-oidc"]
+	path = kong-with-plugins/plugins/kong-oidc
+	url = https://github.com/nokia/kong-oidc
+[submodule "kong-with-plugins/plugins/kong-token-introspection"]
+	path = kong-with-plugins/plugins/kong-token-introspection
+	url = https://github.com/VentaApps/kong-token-introspection

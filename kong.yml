@@ -1,0 +1,38 @@
+_format_version: "2.1"
+_transform: true
+
+services:
+
+- name: oidc
+  host:  upstream
+  port: 80
+  protocol: http
+  plugins: 
+  - name: oidc
+    config: 
+      discovery: http://host.docker.internal:9080/realms/test/.well-known/openid-configuration
+      client_id: oidc-client
+      client_secret: secret
+  routes:
+  - name: oidc-route
+    paths:
+    - /oidc/
+    strip_path: true
+
+- name: access-token
+  host:  upstream
+  port: 80
+  protocol: http
+  plugins: 
+  - name: access-token-introspection
+    config:
+      introspection_endpoint: http://host.docker.internal:9080/realms/test/protocol/openid-connect/token/introspect
+      client_id: introspection-client
+      client_secret: secret
+      token_cache_time: 10
+      scope: system-access
+  routes:
+  - name: access-token-route
+    paths:
+    - /token/
+    strip_path: true

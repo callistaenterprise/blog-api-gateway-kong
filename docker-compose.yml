@@ -1,0 +1,37 @@
+version: '3.9'
+
+services:
+
+  upstream:
+    image: ealen/echo-server
+
+  keycloak:
+    image: quay.io/keycloak/keycloak
+    ports:
+      - "9080:9080"
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    command: 
+      - start-dev
+      - --db=dev-mem
+      - --hostname=host.docker.internal
+      - --http-port=9080
+      - --import-realm
+    volumes:
+      - ./keycloak-test-realm.json:/opt/keycloak/data/import/realm.json
+
+  kong:
+    image: kong-with-plugins
+    build:
+      context: ./kong-with-plugins
+    user: root
+    volumes:
+      - ./kong.yml:/etc/kong/kong.yml
+      - ./kong.conf:/etc/kong/kong.conf
+    environment:
+      KONG_DATABASE: "off"
+      KONG_DECLARATIVE_CONFIG: "/etc/kong/kong.yml"
+    ports:
+      - "8080:8080"
+      - "8081:8081"

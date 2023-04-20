@@ -1,0 +1,67 @@
+{
+  "realm": "test",
+  "enabled": true,
+  "users": [
+    {
+      "id": "service-account-system-client",
+      "username": "service-account-system-client",
+      "enabled": true,
+      "serviceAccountClientId": "system-client"
+    },
+    {
+      "username": "service-account-introspection-client",
+      "enabled": true,
+      "serviceAccountClientId": "introspection-client"
+    },
+	{
+	  "username" : "testuser",
+	  "enabled" : true,
+	  "credentials" : [
+		  {
+	        "type" : "password",
+	        "value" : "secret"
+	      }
+	  ]
+	}
+  ],
+  "clients": [
+    {
+      "clientId": "oidc-client",
+      "enabled": true,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "secret",
+      "redirectUris": [
+        "http://host.docker.internal:8080/oidc/*"
+      ],
+      "standardFlowEnabled": true,
+      "protocol": "openid-connect"
+    },
+    {
+      "clientId": "introspection-client",
+      "enabled": true,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "secret",
+      "serviceAccountsEnabled": true,
+      "authorizationServicesEnabled": true,
+      "protocol": "openid-connect"
+    },
+    {
+      "clientId": "system-client",
+      "enabled": true,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "secret",
+      "serviceAccountsEnabled": true,
+      "authorizationServicesEnabled": true,
+      "protocol": "openid-connect",
+      "defaultClientScopes": [
+        "system-access"
+      ]
+    }
+  ],
+  "clientScopes": [
+      {
+        "name": "system-access",
+        "protocol": "openid-connect"
+      }
+  ]
+}
