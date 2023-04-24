@@ -29,9 +29,13 @@ services:
     volumes:
       - ./kong.yml:/etc/kong/kong.yml
       - ./kong.conf:/etc/kong/kong.conf
+      - ./certs:/etc/kong/ssl
     environment:
       KONG_DATABASE: "off"
       KONG_DECLARATIVE_CONFIG: "/etc/kong/kong.yml"
+      KONG_SSL: "on"
     ports:
       - "8080:8080"
       - "8081:8081"
+      - "8443:8443"
+      - "8444:8444"

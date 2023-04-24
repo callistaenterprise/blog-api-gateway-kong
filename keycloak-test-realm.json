@@ -41,6 +41,7 @@
       "enabled": true,
       "clientAuthenticatorType": "client-secret",
       "secret": "secret",
+      "standardFlowEnabled": false,
       "serviceAccountsEnabled": true,
       "authorizationServicesEnabled": true,
       "protocol": "openid-connect"
@@ -50,6 +51,7 @@
       "enabled": true,
       "clientAuthenticatorType": "client-secret",
       "secret": "secret",
+      "standardFlowEnabled": false,
       "serviceAccountsEnabled": true,
       "authorizationServicesEnabled": true,
       "protocol": "openid-connect",

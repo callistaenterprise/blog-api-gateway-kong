@@ -36,3 +36,24 @@ services:
     paths:
     - /token/
     strip_path: true
+
+- name: mtls
+  host:  upstream
+  port: 80
+  protocol: http
+  plugins: 
+  - name: mtls-auth
+    config:
+      upstream_cert_s_dn_header: "X-Client-Cert-Dn"
+      upstream_cert_cn_header: "X-Client-Cert-San"
+      upstream_cert_org_header: "X-Client-Cert-Organization"
+  - name: mtls-acl
+    config:
+      certificate_header_name: "X-Client-Cert-Organization" 
+      allow:
+      - "Callista Enterprise AB"
+  routes:
+  - name: mtls-route
+    paths:
+    - /mtls/
+    strip_path: true
