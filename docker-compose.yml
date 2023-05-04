@@ -9,6 +9,7 @@ services:
     image: quay.io/keycloak/keycloak
     ports:
       - "9080:9080"
+      - "9443:9443"
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
@@ -17,9 +18,16 @@ services:
       - --db=dev-mem
       - --hostname=host.docker.internal
       - --http-port=9080
+      - --https-port=9443
+      - --https-certificate-file=/opt/keycloak/ssl/server/localhost.crt
+      - --https-certificate-key-file=/opt/keycloak/ssl/server/localhost.key
+      - --https-trust-store-file=/opt/keycloak/ssl/CA/localCA.p12
+      - --https-trust-store-password=secret
+      - --https-client-auth=request
       - --import-realm
     volumes:
       - ./keycloak-test-realm.json:/opt/keycloak/data/import/realm.json
+      - ./certs:/opt/keycloak/ssl
 
   kong:
     image: kong-with-plugins

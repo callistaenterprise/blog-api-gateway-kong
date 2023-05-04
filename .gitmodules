@@ -1,12 +1,12 @@
 [submodule "kong-with-plugins/plugins/kong-oidc"]
 	path = kong-with-plugins/plugins/kong-oidc
 	url = https://github.com/nokia/kong-oidc
-[submodule "kong-with-plugins/plugins/kong-token-introspection"]
-	path = kong-with-plugins/plugins/kong-token-introspection
-	url = https://github.com/VentaApps/kong-token-introspection
 [submodule "kong-with-plugins/plugins/kong-plugin-mtls-auth"]
 	path = kong-with-plugins/plugins/kong-plugin-mtls-auth
 	url = https://github.com/callistaenterprise/kong-plugin-mtls-auth
 [submodule "kong-with-plugins/plugins/kong-plugin-mtls-acl"]
 	path = kong-with-plugins/plugins/kong-plugin-mtls-acl
 	url = https://github.com/callistaenterprise/kong-plugin-mtls-acl
+[submodule "kong-with-plugins/plugins/kong-plugin-token-introspection"]
+	path = kong-with-plugins/plugins/kong-plugin-token-introspection
+	url = https://github.com/callistaenterprise/kong-plugin-token-introspection

@@ -5,8 +5,8 @@ COPY ./plugins/kong-oidc /custom-plugins/kong-oidc
 WORKDIR /custom-plugins/kong-oidc
 RUN luarocks make
 
-COPY ./plugins/kong-token-introspection /custom-plugins/kong-token-introspection
-WORKDIR /custom-plugins/kong-token-introspection
+COPY ./plugins/kong-plugin-token-introspection /custom-plugins/kong-plugin-token-introspection
+WORKDIR /custom-plugins/kong-plugin-token-introspection
 RUN luarocks make
 
 COPY ./plugins/kong-plugin-mtls-auth /custom-plugins/kong-plugin-mtls-auth

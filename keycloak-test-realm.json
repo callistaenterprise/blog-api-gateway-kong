@@ -9,6 +9,12 @@
       "serviceAccountClientId": "system-client"
     },
     {
+      "id": "service-account-system-client-mtls",
+      "username": "service-account-system-client-mtls",
+      "enabled": true,
+      "serviceAccountClientId": "system-client-mtls"
+    },
+    {
       "username": "service-account-introspection-client",
       "enabled": true,
       "serviceAccountClientId": "introspection-client"
@@ -31,7 +37,8 @@
       "clientAuthenticatorType": "client-secret",
       "secret": "secret",
       "redirectUris": [
-        "http://host.docker.internal:8080/oidc/*"
+        "http://host.docker.internal:8080/oidc/*",
+        "https://host.docker.internal:8443/oidc/*"
       ],
       "standardFlowEnabled": true,
       "protocol": "openid-connect"
@@ -55,6 +62,23 @@
       "serviceAccountsEnabled": true,
       "authorizationServicesEnabled": true,
       "protocol": "openid-connect",
+      "defaultClientScopes": [
+        "system-access"
+      ]
+    },
+    {
+      "clientId": "system-client-mtls",
+      "enabled": true,
+      "clientAuthenticatorType": "client-x509",
+      "standardFlowEnabled": false,
+      "serviceAccountsEnabled": true,
+      "authorizationServicesEnabled": true,
+      "protocol": "openid-connect",
+      "attributes": {
+        "x509.subjectdn": ".*O=Callista Enterprise AB,.*",
+        "x509.allow.regex.pattern.comparison": "true",
+        "tls.client.certificate.bound.access.tokens": "true"
+      },
       "defaultClientScopes": [
         "system-access"
       ]

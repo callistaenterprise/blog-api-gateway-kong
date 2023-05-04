@@ -24,17 +24,39 @@ services:
   port: 80
   protocol: http
   plugins: 
-  - name: access-token-introspection
+  - name: token-introspection
     config:
       introspection_endpoint: http://host.docker.internal:9080/realms/test/protocol/openid-connect/token/introspect
       client_id: introspection-client
       client_secret: secret
-      token_cache_time: 10
-      scope: system-access
+      scope:
+      - system-access
   routes:
   - name: access-token-route
     paths:
     - /token/
+    strip_path: true
+
+- name: access-token-mtls
+  host:  upstream
+  port: 80
+  protocol: http
+  plugins: 
+  - name: mtls-auth
+    config:
+      upstream_cert_header: "X-Client-Cert"
+  - name: token-introspection
+    config:
+      introspection_endpoint: https://host.docker.internal:9443/realms/test/protocol/openid-connect/token/introspect
+      client_id: introspection-client
+      client_secret: secret
+      certificate_header: "X-Client-Cert"
+      scope:
+      - system-access
+  routes:
+  - name: access-token-mtls-route
+    paths:
+    - /token-mtls/
     strip_path: true
 
 - name: mtls
